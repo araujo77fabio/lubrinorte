@@ -778,15 +778,15 @@ a { color: inherit; }
 
     <div class="truck-fleet-stats">
       <div class="stat-item">
-        <div class="stat-number" data-target="350">0</div>
+        <div class="stat-number" data-target="4800">0</div>
         <div class="stat-label">Mil km de Confiabilidade</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number" data-target="2850">0</div>
+        <div class="stat-number" data-target="143">0</div>
         <div class="stat-label">Frotas Atendidas</div>
       </div>
       <div class="stat-item">
-        <div class="stat-number" data-target="98">0</div>
+        <div class="stat-number" data-target="97">0</div>
         <div class="stat-label">% Retenção de Clientes</div>
       </div>
     </div>
@@ -1328,7 +1328,12 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       ease: 'power2.out',
       snap: { innerHTML: 1 },
       delay: i * 0.2,
-      onUpdate: () => { el.innerHTML = Math.round(gsap.getProperty(el, 'innerHTML')) + (target <= 100 ? '%' : ''); },
+      onUpdate: () => {
+        const val = Math.round(gsap.getProperty(el, 'innerHTML'));
+        let formatted = val.toString();
+        if (val >= 1000) formatted = (val / 1000).toFixed(0) + '.' + (val % 1000).toString().padStart(3, '0');
+        el.innerHTML = formatted + (target <= 100 ? '%' : '');
+      },
     });
   });
 

@@ -1,0 +1,471 @@
+/* ============================================
+   TRUCK FLEET OILS SECTION - STANDALONE CSS
+   ============================================
+
+   This file contains all styling for the truck fleet component.
+   Can be imported separately or embedded in main stylesheet.
+
+   Dependencies: None (self-contained)
+   Browser Support: Chrome 90+, Firefox 88+, Safari 14+, Edge 90+
+
+   Color Scheme:
+   - Primary: #070707 (black)
+   - Accent 1: #C9A84C (gold)
+   - Accent 2: #c8161d (red)
+   - Text: #FFFFFF (white), #E0E0E0 (light gray)
+*/
+
+/* ===== CSS VARIABLES ===== */
+:root {
+    --color-black: #070707;
+    --color-gold: #C9A84C;
+    --color-red: #c8161d;
+    --color-white: #FFFFFF;
+    --color-text-secondary: #E0E0E0;
+    --color-dark-overlay: rgba(7, 7, 7, 0.65);
+    --color-gradient-overlay: linear-gradient(135deg, rgba(7, 7, 7, 0.7) 0%, rgba(200, 22, 29, 0.3) 100%);
+
+    --font-family-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    --font-family-display: 'Playfair Display', 'Georgia', serif;
+
+    --transition-fast: 0.3s ease;
+    --transition-smooth: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===== BASE STYLES ===== */
+.truck-fleet-section {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--color-black);
+}
+
+/* Background Image with Parallax */
+.truck-fleet-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/external_images/uni/lubrinorte_truck_fleet_hero-5C9GxXvK8Evput9BDHapzk.webp');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    z-index: 1;
+    will-change: transform;
+}
+
+@supports not (background-attachment: fixed) {
+    .truck-fleet-hero-bg {
+        background-attachment: scroll;
+    }
+}
+
+/* Gradient Overlay */
+.truck-fleet-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-gradient-overlay);
+    z-index: 2;
+    backdrop-filter: brightness(0.85);
+}
+
+/* Content Container */
+.truck-fleet-content {
+    position: relative;
+    z-index: 3;
+    width: 100%;
+    max-width: 1400px;
+    padding: 3rem 2rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+/* ===== HERO SECTION ===== */
+.truck-fleet-hero {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Hero Title */
+.truck-fleet-title {
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--color-white);
+    font-family: var(--font-family-display);
+    word-spacing: 100vw;
+    overflow: hidden;
+}
+
+.truck-fleet-title span {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: bottom;
+    clip-path: inset(0 100% 0 0);
+}
+
+.truck-fleet-title .accent {
+    color: var(--color-gold);
+    text-shadow: 0 0 20px rgba(201, 168, 76, 0.3);
+}
+
+/* Subtitle */
+.truck-fleet-subtitle {
+    font-size: clamp(1rem, 2.5vw, 1.35rem);
+    line-height: 1.8;
+    color: var(--color-text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    font-weight: 300;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* ===== BENEFITS GRID ===== */
+.truck-fleet-benefits {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.benefit-card {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(201, 168, 76, 0.2);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    transition: all var(--transition-smooth);
+    opacity: 0;
+    transform: translateY(30px);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.benefit-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(201, 168, 76, 0.1) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+    pointer-events: none;
+}
+
+.benefit-card:hover {
+    border-color: var(--color-gold);
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(201, 168, 76, 0.15);
+}
+
+.benefit-card:hover::before {
+    opacity: 1;
+}
+
+.benefit-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem;
+    background: linear-gradient(135deg, var(--color-gold), var(--color-red));
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.benefit-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--color-white);
+    margin-bottom: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+.benefit-description {
+    font-size: 0.95rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+/* ===== CTA BUTTONS ===== */
+.truck-fleet-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    margin: 2rem 0;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.btn {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-gold), #d4af37);
+    color: var(--color-black);
+    box-shadow: 0 10px 30px rgba(201, 168, 76, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(201, 168, 76, 0.4);
+    letter-spacing: 2px;
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-gold);
+    border: 2px solid var(--color-gold);
+}
+
+.btn-secondary:hover {
+    background: var(--color-gold);
+    color: var(--color-black);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(201, 168, 76, 0.3);
+}
+
+.btn-secondary:active {
+    transform: translateY(0);
+}
+
+/* ===== STATS SECTION ===== */
+.truck-fleet-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 4rem 0;
+    padding: 3rem 0;
+    border-top: 1px solid rgba(201, 168, 76, 0.2);
+    border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+}
+
+.stat-item {
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.stat-number {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    color: var(--color-gold);
+    font-family: var(--font-family-display);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 30px rgba(201, 168, 76, 0.3);
+}
+
+.stat-label {
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+/* ===== ACCESSIBILITY ===== */
+.btn:focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 2px;
+}
+
+.benefit-card:focus-visible {
+    outline: 3px solid var(--color-gold);
+    outline-offset: 2px;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .truck-fleet-hero-bg {
+        background-attachment: scroll !important;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: more) {
+    .truck-fleet-title {
+        text-shadow: 2px 2px 4px var(--color-black);
+    }
+
+    .benefit-card {
+        border-width: 2px;
+    }
+
+    .btn {
+        font-weight: 700;
+    }
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet */
+@media (max-width: 768px) {
+    .truck-fleet-content {
+        padding: 2rem 1.5rem;
+        gap: 2rem;
+    }
+
+    .truck-fleet-title {
+        font-size: clamp(2rem, 7vw, 3rem);
+        word-spacing: 100vw;
+    }
+
+    .truck-fleet-hero-bg {
+        background-attachment: scroll;
+    }
+
+    .truck-fleet-benefits {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .benefit-card {
+        padding: 1.5rem;
+    }
+
+    .truck-fleet-cta {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 1rem 1.5rem;
+    }
+
+    .truck-fleet-stats {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 2rem 0;
+    }
+
+    .stat-number {
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+    }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+    .truck-fleet-content {
+        padding: 1.5rem 1rem;
+        gap: 1.5rem;
+    }
+
+    .truck-fleet-title {
+        font-size: 1.8rem;
+    }
+
+    .truck-fleet-subtitle {
+        font-size: 1rem;
+    }
+
+    .benefit-card {
+        padding: 1.2rem;
+    }
+
+    .benefit-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+    }
+
+    .btn {
+        padding: 0.85rem 1.2rem;
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stat-label {
+        font-size: 0.85rem;
+    }
+}
+
+/* ===== CUSTOM CURSOR ===== */
+.truck-fleet-section {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="none" stroke="%23C9A84C" stroke-width="2"/><circle cx="16" cy="16" r="4" fill="%23C9A84C"/></svg>') 16 16, auto;
+}
+
+.truck-fleet-section .btn,
+.truck-fleet-section .benefit-card {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="none" stroke="%23c8161d" stroke-width="2"/><circle cx="16" cy="16" r="4" fill="%23c8161d"/></svg>') 16 16, pointer;
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .truck-fleet-section {
+        min-height: auto;
+        page-break-inside: avoid;
+    }
+
+    .truck-fleet-overlay {
+        display: none;
+    }
+
+    .btn {
+        border: 1px solid var(--color-gold);
+        color: var(--color-gold);
+        background: transparent;
+    }
+}
+
+/* ===== DARK MODE (explicit for consistency) ===== */
+@media (prefers-color-scheme: dark) {
+    .truck-fleet-overlay {
+        background: var(--color-gradient-overlay);
+    }
+}

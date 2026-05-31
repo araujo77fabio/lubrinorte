@@ -1321,19 +1321,25 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
   /* Stats Counter */
   document.querySelectorAll('.stat-number').forEach((el, i) => {
     const target = parseInt(el.getAttribute('data-target'), 10);
-    gsap.from(el, {
-      scrollTrigger: { trigger: '.truck-fleet-stats', start: 'top 75%', once: true },
-      innerHTML: 0,
-      duration: 2,
+    const isPercentage = target <= 100;
+
+    gsap.to(el, {
+      scrollTrigger: { trigger: '.truck-fleet-stats', start: 'top 80%', once: true },
+      textContent: target,
+      duration: 2.5,
       ease: 'power2.out',
-      snap: { innerHTML: 1 },
-      delay: i * 0.2,
-      onUpdate: () => {
-        const val = Math.round(gsap.getProperty(el, 'innerHTML'));
+      delay: i * 0.15,
+      snap: { textContent: 1 },
+      onUpdate: function() {
+        let val = Math.round(this.targets()[0].textContent);
         let formatted = val.toString();
-        if (val >= 1000) formatted = (val / 1000).toFixed(0) + '.' + (val % 1000).toString().padStart(3, '0');
-        el.innerHTML = formatted + (target <= 100 ? '%' : '');
-      },
+        if (val >= 1000) {
+          const thousands = Math.floor(val / 1000);
+          const remainder = val % 1000;
+          formatted = thousands + '.' + remainder.toString().padStart(3, '0');
+        }
+        el.innerHTML = formatted + (isPercentage ? '%' : '');
+      }
     });
   });
 

@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lubrinorte Manaus | Distribuidora Texaco e UNI</title>
+  <meta name="description" content="Distribuidora de óleos Texaco e UNI em Manaus. Lubrificantes para frotas, oficinas, caminhões, barcos, indústrias e transportadoras em Manaus-AM.">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS ── */
+:root {
+  --black:      #070707;
+  --dark:       #0d0d11;
+  --surface:    #13131a;
+  --surface2:   #1a1a24;
+  --gold:       #c9a84c;
+  --gold2:      #f0d47a;
+  --gold-dark:  #8c6a18;
+  --red:        #c8161d;
+  --blue:       #0f2d6e;
+  --white:      #ffffff;
+  --muted:      #888899;
+  --light-bg:   #f4f3ef;
+  --line:       rgba(255,255,255,.08);
+  --ff-d: 'Bebas Neue', sans-serif;
+  --ff-b: 'Inter', sans-serif;
+  --ff-m: 'IBM Plex Mono', monospace;
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { overflow-x: hidden; }
+body { font-family: var(--ff-b); background: var(--black); color: var(--white); overflow-x: hidden; }
+a { color: inherit; }
+
+/* ── CURSOR ── */
+.cursor, .cursor-ring {
+  position: fixed; border-radius: 50%; pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%); will-change: left,top;
+}
+.cursor      { width: 8px;  height: 8px;  background: var(--gold2); }
+.cursor-ring { width: 36px; height: 36px; border: 1px solid rgba(201,168,76,.45); transition: width .3s, height .3s, border-color .3s; }
+@media (max-width: 900px) { .cursor, .cursor-ring { display: none; } }
+
+
+/* ── HEADER ── */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  padding: 0 6%; height: 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background .5s, border-color .5s, box-shadow .5s;
+}
+.site-header.solid {
+  background: rgba(7,7,7,.96);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 4px 40px rgba(0,0,0,.4);
+}
+
+/* ── LOGO ── */
+.logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--white); }
+.logo-svg-wrap { width: 46px; height: 46px; flex-shrink: 0; }
+
+/* SVG logo inline - oil drop + L */
+.logo-icon-path-bg { fill: var(--blue); }
+.logo-icon-path-red { fill: var(--red); }
+.logo-icon-l { fill: #fff; }
+
+.logo-text strong { display: block; font-size: 15px; font-weight: 800; letter-spacing: .04em; }
+.logo-text strong em { color: var(--red); font-style: normal; }
+.logo-text small  { display: block; font-size: 10px; color: var(--muted); font-family: var(--ff-m); margin-top: 1px; letter-spacing: .04em; }
+
+/* ── NAV ── */
+.site-nav { display: flex; align-items: center; gap: 28px; }
+.site-nav a { font-size: 14px; font-weight: 500; color: rgba(255,255,255,.7); text-decoration: none; transition: color .2s; }
+.site-nav a:hover { color: var(--gold2); }
+.nav-phone {
+  font-family: var(--ff-m);
+  font-size: 12px !important;
+  letter-spacing: .04em;
+  color: var(--muted) !important;
+  border: 1px solid var(--line);
+  padding: 8px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  transition: color .2s, border-color .2s !important;
+}
+.nav-phone:hover { color: var(--gold2) !important; border-color: rgba(201,168,76,.3); }
+
+.nav-cta {
+  background: linear-gradient(135deg, var(--gold2), var(--gold));
+  color: #111 !important; font-weight: 700 !important;
+  padding: 10px 20px; border-radius: 999px; font-size: 13px !important;
+  transition: transform .2s, box-shadow .2s !important; white-space: nowrap;
+}
+.nav-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,168,76,.38); }
+
+/* ── HAMBURGER ── */
+.hamburger {
+  display: none; background: rgba(255,255,255,.06);
+  border: 1px solid var(--line); color: var(--white);
+  width: 42px; height: 42px; border-radius: 10px; cursor: pointer;
+  flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+}
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); transition: .3s; }
+
+/* ── MOBILE NAV ── */
+.mobile-nav {
+  display: none; position: fixed; inset: 0; z-index: 400;
+  background: rgba(7,7,7,.98); backdrop-filter: blur(20px);
+  flex-direction: column; align-items: center; justify-content: center; gap: 36px;
+  transform: translateX(100%); transition: transform .4s cubic-bezier(.77,0,.175,1);
+}
+.mobile-nav.open { transform: translateX(0); }
+.mobile-nav a { font-family: var(--ff-d); font-size: 42px; color: var(--white); text-decoration: none; letter-spacing: .04em; transition: color .2s; }
+.mobile-nav a:hover { color: var(--gold2); }
+.mobile-nav .close-btn { position: absolute; top: 24px; right: 24px; background: none; border: none; color: var(--white); font-size: 28px; cursor: pointer; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  position: relative; overflow: hidden; padding: 110px 6% 80px;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 60% 50% at 12% 22%, rgba(201,168,76,.22) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 40% at 88% 14%, rgba(200,22,29,.2)  0%, transparent 55%),
+    radial-gradient(ellipse 40% 40% at 65% 88%, rgba(201,168,76,.08) 0%, transparent 50%),
+    linear-gradient(180deg, #040405 0%, #0b0b11 55%, #040405 100%);
+}
+.hero-grid-lines {
+  position: absolute; inset: 0; z-index: 1; opacity: .05;
+  background-image:
+    linear-gradient(rgba(201,168,76,.6) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,.6) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 70% at 50% 50%, black, transparent);
+}
+.hero-inner {
+  position: relative; z-index: 3;
+  display: grid; grid-template-columns: 1.1fr .9fr;
+  gap: 64px; align-items: center;
+  width: 100%; max-width: 1400px; margin: 0 auto;
+}
+
+/* BADGE */
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(201,168,76,.09); border: 1px solid rgba(201,168,76,.22);
+  color: var(--gold2); padding: 8px 14px; border-radius: 999px;
+  font-size: 12px; font-family: var(--ff-m); letter-spacing: .08em;
+  margin-bottom: 28px;
+}
+.badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); animation: blink 2s infinite; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+/* TITLE */
+.hero-title {
+  font-family: var(--ff-d);
+  font-size: clamp(52px, 8vw, 120px);
+  line-height: .93; letter-spacing: .01em; margin-bottom: 28px;
+}
+.hero-title .line { display: block; overflow: hidden; }
+.hero-title .line-inner { display: block; } /* no initial transform - GSAP sets it */
+.hero-title .gold  { color: var(--gold2); }
+.hero-title .ghost { color: rgba(255,255,255,.18); }
+
+.hero-sub {
+  font-size: 17px; line-height: 1.7; color: rgba(255,255,255,.55);
+  max-width: 500px; margin-bottom: 42px;
+}
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* RIGHT CARD */
+.hero-card {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 28px; padding: 28px 26px; backdrop-filter: blur(24px);
+  position: relative; overflow: hidden;
+}
+.hero-card::before {
+  content: ''; position: absolute; top: -80px; right: -80px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(201,168,76,.18), transparent 70%);
+  pointer-events: none;
+}
+.hc-label {
+  font-family: var(--ff-m); font-size: 10px; letter-spacing: .15em;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 18px;
+}
+.prow {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; padding: 14px 16px; border-radius: 14px;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.07);
+  margin-bottom: 8px; transition: background .25s, border-color .25s; cursor: default;
+}
+.prow:hover { background: rgba(201,168,76,.06); border-color: rgba(201,168,76,.2); }
+.prow strong { display: block; font-size: 16px; font-weight: 700; }
+.prow span   { font-size: 12px; color: var(--muted); margin-top: 2px; display: block; }
+.pill {
+  background: rgba(201,168,76,.12); border: 1px solid rgba(201,168,76,.28);
+  color: var(--gold2); padding: 5px 10px; border-radius: 999px;
+  font-size: 11px; font-family: var(--ff-m); white-space: nowrap; flex-shrink: 0;
+}
+.pill.red { background: rgba(200,22,29,.12); border-color: rgba(200,22,29,.3); color: #f87171; }
+
+.hc-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 16px; }
+.hc-stat {
+  background: rgba(0,0,0,.28); border: 1px solid rgba(255,255,255,.07);
+  border-radius: 14px; padding: 14px 10px; text-align: center;
+}
+.hc-stat strong { display: block; font-family: var(--ff-d); font-size: 28px; color: var(--gold2); line-height: 1; }
+.hc-stat span   { font-size: 10px; color: var(--muted); font-family: var(--ff-m); letter-spacing: .06em; }
+
+/* Scroll hint */
+.scroll-hint {
+  position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+  z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.scroll-hint span { font-family: var(--ff-m); font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); }
+.scroll-line { width: 1px; height: 52px; background: linear-gradient(to bottom, var(--gold), transparent); animation: spulse 2.2s ease-in-out infinite; }
+@keyframes spulse { 0%,100%{opacity:.3;transform:scaleY(.7)} 50%{opacity:1;transform:scaleY(1)} }
+
+/* ── MARQUEE ── */
+.marquee-wrap { overflow: hidden; background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 18px 0; }
+.marquee-track { display: flex; gap: 56px; width: max-content; animation: mq 24s linear infinite; }
+.marquee-track:hover { animation-play-state: paused; }
+.mi { font-family: var(--ff-d); font-size: 20px; letter-spacing: .1em; color: rgba(255,255,255,.18); flex-shrink: 0; white-space: nowrap; }
+.mi.gold { color: rgba(201,168,76,.45); }
+.mi.sep  { color: rgba(255,255,255,.1); }
+@keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── SECTION BASE ── */
+.section { padding: 100px 6%; }
+.container { max-width: 1400px; margin: 0 auto; }
+.sec-head { margin-bottom: 56px; }
+.eyebrow {
+  font-family: var(--ff-m); font-size: 11px; font-weight: 500;
+  letter-spacing: .2em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+}
+.eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--gold); display: block; flex-shrink: 0; }
+.sec-title { font-family: var(--ff-d); font-size: clamp(36px, 5vw, 68px); line-height: .96; letter-spacing: .02em; margin-bottom: 18px; }
+.sec-desc { font-size: 17px; line-height: 1.7; color: var(--muted); max-width: 580px; }
+
+/* ── PRODUTOS (light) ── */
+.s-products { background: var(--light-bg); color: #111; }
+.s-products .eyebrow, .s-products .eyebrow::before { color: var(--gold-dark); background: var(--gold-dark); }
+.s-products .sec-title { color: #0d0d0d; }
+.s-products .sec-desc  { color: #666; }
+
+.products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+
+.pcard {
+  background: #fff; border-radius: 24px; overflow: hidden;
+  border: 1px solid rgba(0,0,0,.07); box-shadow: 0 6px 28px rgba(0,0,0,.06);
+  transition: transform .35s cubic-bezier(.23,1,.32,1), box-shadow .35s;
+}
+.pcard:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,.13); }
+
+.pcard-visual {
+  height: 170px; position: relative; display: flex;
+  align-items: flex-end; padding: 22px; overflow: hidden;
+}
+.pcard-visual.texaco {
+  background:
+    radial-gradient(ellipse 60% 60% at 75% 25%, rgba(200,22,29,.75) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 40% at 20% 80%, rgba(180,10,10,.3)  0%, transparent 50%),
+    linear-gradient(160deg, #0a0002, #1a0303);
+}
+.pcard-visual.texaco::after {
+  content: ''; position: absolute; top: 20px; right: 20px;
+  width: 60px; height: 60px; border: 1.5px solid rgba(200,22,29,.35); border-radius: 50%;
+}
+.pcard-visual.uni {
+  background:
+    radial-gradient(ellipse 55% 55% at 30% 25%, rgba(201,168,76,.65) 0%, transparent 60%),
+    radial-gradient(ellipse 35% 35% at 85% 80%, rgba(201,168,76,.25) 0%, transparent 50%),
+    linear-gradient(160deg, #060500, #151000);
+}
+.pcard-visual.uni::after {
+  content: ''; position: absolute; top: 20px; right: 20px;
+  width: 60px; height: 60px; border: 1.5px solid rgba(201,168,76,.35); border-radius: 50%;
+}
+.pcard-visual.moura {
+  background:
+    radial-gradient(ellipse 55% 55% at 50% 20%, rgba(59,130,246,.5) 0%, transparent 60%),
+    linear-gradient(160deg, #02020a, #090918);
+}
+.pcard-visual.moura::after {
+  content: ''; position: absolute; top: 20px; right: 20px;
+  width: 60px; height: 60px; border: 1.5px solid rgba(59,130,246,.35); border-radius: 50%;
+}
+.pcard-brand { font-family: var(--ff-d); font-size: 48px; letter-spacing: .05em; color: #fff; position: relative; z-index: 2; line-height: 1; }
+.pcard-brand.red  { color: var(--red); }
+.pcard-brand.blue { color: #60a5fa; }
+
+.pcard-body { padding: 26px; }
+.pcard-body h3  { font-size: 17px; font-weight: 700; color: #111; margin-bottom: 14px; }
+.pcard-body ul  { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.pcard-body li  { font-size: 14px; color: #555; display: flex; align-items: flex-start; gap: 10px; line-height: 1.4; }
+.pcard-body li::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 5px; }
+
+/* ── SEGMENTOS (dark) ── */
+.s-segments { background: var(--dark); }
+.segments-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 20px; }
+.seg-card {
+  background: linear-gradient(160deg, rgba(255,255,255,.04), rgba(255,255,255,.01));
+  border: 1px solid var(--line); border-radius: 24px; padding: 36px 32px;
+  display: flex; gap: 24px; align-items: flex-start;
+  transition: background .3s, border-color .3s, transform .3s;
+}
+.seg-card:hover {
+  background: linear-gradient(160deg, rgba(201,168,76,.06), rgba(201,168,76,.01));
+  border-color: rgba(201,168,76,.18); transform: translateY(-4px);
+}
+.seg-icon {
+  width: 56px; height: 56px; flex-shrink: 0; border-radius: 16px;
+  background: rgba(201,168,76,.08); border: 1px solid rgba(201,168,76,.18);
+  display: grid; place-items: center;
+}
+.seg-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+.seg-card p  { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+/* ── STATS ── */
+.s-stats { padding: 0; background: var(--black); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.stats-rail { display: grid; grid-template-columns: repeat(4,1fr); }
+.stat-col { padding: 60px 36px; border-right: 1px solid var(--line); text-align: center; }
+.stat-col:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--ff-d);
+  font-size: clamp(52px, 6.5vw, 92px);
+  color: var(--gold2); line-height: 1; display: block; margin-bottom: 8px;
+}
+.stat-lbl { font-size: 13px; color: var(--muted); font-family: var(--ff-m); letter-spacing: .08em; text-transform: uppercase; }
+
+/* ── DIFERENCIAIS ── */
+.s-diffs { background: var(--surface); }
+.diffs-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 16px; }
+.diff-item {
+  display: flex; gap: 20px; align-items: flex-start;
+  padding: 30px 28px; background: rgba(255,255,255,.02);
+  border: 1px solid var(--line); border-radius: 20px; transition: background .25s, border-color .25s;
+}
+.diff-item:hover { background: rgba(201,168,76,.04); border-color: rgba(201,168,76,.14); }
+.diff-num { font-family: var(--ff-d); font-size: 56px; color: rgba(201,168,76,.12); line-height: 1; flex-shrink: 0; min-width: 48px; }
+.diff-item h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+.diff-item p  { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+/* ── BANNER ── */
+.s-banner { padding: 0; height: 340px; position: relative; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.banner-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201,168,76,.18) 0%, transparent 55%),
+    radial-gradient(ellipse 50% 50% at 15% 100%, rgba(200,22,29,.15) 0%, transparent 50%),
+    linear-gradient(180deg, #060608, #0d0d14 50%, #060608);
+}
+.banner-lines {
+  position: absolute; inset: 0; opacity: .06;
+  background-image: repeating-linear-gradient(90deg, transparent, transparent 59px, rgba(201,168,76,.7) 59px, rgba(201,168,76,.7) 60px);
+}
+.banner-content { position: relative; z-index: 2; text-align: center; }
+.banner-content h2 { font-family: var(--ff-d); font-size: clamp(44px, 7vw, 108px); letter-spacing: .03em; line-height: .95; color: rgba(255,255,255,.88); }
+.banner-content h2 .highlight { color: var(--gold2); }
+.banner-sub { font-family: var(--ff-m); font-size: 12px; letter-spacing: .2em; color: var(--gold); text-transform: uppercase; margin-top: 24px; }
+
+/* ── COTAÇÃO ── */
+.s-quote { background: var(--black); padding: 100px 6%; }
+.quote-box {
+  background:
+    radial-gradient(ellipse 40% 50% at 8% 18%, rgba(201,168,76,.14) 0%, transparent 50%),
+    radial-gradient(ellipse 35% 40% at 92% 88%, rgba(200,22,29,.08) 0%, transparent 50%),
+    linear-gradient(160deg, #0e0e13, #050507);
+  border: 1px solid rgba(255,255,255,.08); border-radius: 32px; padding: 60px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start;
+  max-width: 1200px; margin: 0 auto;
+}
+.ql .sec-title { font-size: clamp(32px,4vw,56px); margin-bottom: 16px; }
+.ql .desc { font-size: 16px; color: var(--muted); line-height: 1.7; margin-bottom: 32px; }
+
+.form { display: flex; flex-direction: column; gap: 12px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.form input, .form select, .form textarea {
+  width: 100%; padding: 14px 16px;
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px; color: var(--white); font-size: 14px; font-family: var(--ff-b);
+  outline: none; transition: border-color .2s, background .2s;
+}
+.form input::placeholder, .form textarea::placeholder { color: var(--muted); }
+.form input:focus, .form select:focus, .form textarea:focus {
+  border-color: rgba(201,168,76,.4); background: rgba(201,168,76,.04);
+}
+.form select option { background: #111; color: #fff; }
+.form-btn {
+  width: 100%; padding: 16px;
+  background: linear-gradient(135deg, var(--gold2), var(--gold));
+  color: #111; font-weight: 800; font-size: 16px; border: none;
+  border-radius: 14px; cursor: pointer; font-family: var(--ff-b); letter-spacing: .02em;
+  transition: transform .2s, box-shadow .2s;
+}
+.form-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(201,168,76,.32); }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 26px; border-radius: 14px; font-weight: 700; font-size: 15px;
+  text-decoration: none; transition: transform .22s, box-shadow .22s;
+  border: none; font-family: var(--ff-b); cursor: pointer;
+}
+.btn:hover { transform: translateY(-3px); }
+.btn-gold  { background: linear-gradient(135deg,var(--gold2),var(--gold)); color: #111; box-shadow: 0 10px 28px rgba(201,168,76,.24); }
+.btn-gold:hover { box-shadow: 0 16px 40px rgba(201,168,76,.4); }
+.btn-ghost { background: rgba(255,255,255,.06); color: var(--white); border: 1px solid rgba(255,255,255,.14); }
+.btn-ghost:hover { background: rgba(255,255,255,.1); }
+
+/* ── FOOTER ── */
+.site-footer { background: #030303; border-top: 1px solid var(--line); padding: 44px 6%; }
+.footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.footer-right { font-size: 13px; color: var(--muted); line-height: 1.8; text-align: right; }
+.footer-right span { display: block; }
+
+/* ── WHATSAPP FLOAT ── */
+.wa-float {
+  position: fixed; bottom: 26px; right: 26px; z-index: 600;
+  background: #20c763; color: #fff; text-decoration: none;
+  padding: 13px 20px; border-radius: 999px; font-weight: 700; font-size: 14px;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 8px 32px rgba(32,199,99,.38); transition: transform .22s, box-shadow .22s;
+}
+.wa-float:hover { transform: translateY(-3px); box-shadow: 0 14px 44px rgba(32,199,99,.5); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 1100px) { .products-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 900px) {
+  .site-nav { display: none; }
+  .hamburger { display: flex; }
+  .mobile-nav { display: flex; }
+  .hero-inner { grid-template-columns: 1fr; }
+  .hero-visual { max-width: 560px; }
+  .segments-grid { grid-template-columns: 1fr; }
+  .stats-rail { grid-template-columns: repeat(2,1fr); }
+  .stat-col { border-bottom: 1px solid var(--line); }
+  .stats-rail .stat-col:nth-child(2) { border-right: none; }
+  .stats-rail .stat-col:nth-child(3) { border-bottom: none; }
+  .stats-rail .stat-col:nth-child(4) { border-right: none; border-bottom: none; }
+  .diffs-grid { grid-template-columns: 1fr; }
+  .quote-box { grid-template-columns: 1fr; gap: 44px; padding: 40px 28px; }
+  .form-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .products-grid { grid-template-columns: 1fr; }
+  .hc-stats { grid-template-columns: 1fr; }
+  .hero-ctas { flex-direction: column; }
+  .hero-ctas .btn { width: 100%; justify-content: center; }
+  .s-banner { height: 220px; }
+  .footer-right { text-align: left; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="js-cursor"></div>
+<div class="cursor-ring" id="js-ring"></div>
+
+
+<!-- HEADER -->
+<header class="site-header" id="js-header">
+  <a class="logo" href="#">
+    <!-- SVG Logo — oil drop com L -->
+    <div class="logo-svg-wrap">
+      <svg viewBox="0 0 46 46" width="46" height="46" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <!-- Drop shape background -->
+        <path d="M23 2 C23 2 4 20 4 31 C4 40.5 12.5 45 23 45 C33.5 45 42 40.5 42 31 C42 20 23 2 23 2Z" fill="#0f2d6e"/>
+        <!-- Red accent (bottom-right of drop) -->
+        <path d="M33 34 C33 34 42 29 42 31 C42 40.5 33.5 45 23 45 L23 38 C28 38 33 36.5 33 34Z" fill="#c8161d"/>
+        <!-- L shape -->
+        <rect x="14" y="16" width="6"  height="20" rx="1" fill="white"/>
+        <rect x="14" y="30" width="16" height="6"  rx="1" fill="white"/>
+      </svg>
+    </div>
+    <div class="logo-text">
+      <strong>LUBRI<em>NORTE</em></strong>
+      <small>MANAUS • ÓLEOS • LUBRIFICANTES • BATERIAS</small>
+    </div>
+  </a>
+
+  <nav class="site-nav">
+    <a href="#produtos">Produtos</a>
+    <a href="#segmentos">Segmentos</a>
+    <a href="#diferenciais">Diferenciais</a>
+    <a href="https://wa.me/5592362221479" target="_blank" class="nav-phone">(92) 3622-1479</a>
+    <a href="#cotacao" class="nav-cta">Solicitar Cotação</a>
+  </nav>
+
+  <button class="hamburger" id="js-hamburger" aria-label="Abrir menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="js-mobile-nav">
+  <button class="close-btn" id="js-close-nav" aria-label="Fechar">✕</button>
+  <a href="#produtos"     onclick="closeMobileNav()">Produtos</a>
+  <a href="#segmentos"    onclick="closeMobileNav()">Segmentos</a>
+  <a href="#diferenciais" onclick="closeMobileNav()">Diferenciais</a>
+  <a href="#cotacao"      onclick="closeMobileNav()" style="color:var(--gold2)">Solicitar Cotação</a>
+</div>
+
+<main>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="js-hero-bg"></div>
+  <div class="hero-grid-lines"></div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge" id="js-badge">
+        <span class="badge-dot"></span>
+        Distribuição profissional — Manaus, AM
+      </div>
+
+      <h1 class="hero-title" id="js-title">
+        <span class="line"><span class="line-inner">ÓLEOS</span></span>
+        <span class="line"><span class="line-inner gold">TEXACO</span></span>
+        <span class="line"><span class="line-inner gold">E UNI</span></span>
+        <span class="line"><span class="line-inner">PARA FROTAS</span></span>
+        <span class="line"><span class="line-inner ghost">QUE NÃO PARAM.</span></span>
+      </h1>
+
+      <p class="hero-sub" id="js-sub">
+        Fornecimento ágil de lubrificantes, graxas, fluidos e baterias
+        para transportadoras, oficinas, estaleiros e indústrias em Manaus.
+      </p>
+
+      <div class="hero-ctas" id="js-ctas">
+        <a class="btn btn-gold" href="#cotacao">Solicitar Cotação</a>
+        <a class="btn btn-ghost" href="#produtos">Ver Produtos</a>
+      </div>
+    </div>
+
+    <div class="hero-visual" id="js-visual">
+      <div class="hero-card">
+        <p class="hc-label">// Produtos em alta demanda</p>
+        <div class="prow">
+          <div><strong>15W40 Diesel</strong><span>Caminhões, ônibus e máquinas pesadas</span></div>
+          <span class="pill red">Alta demanda</span>
+        </div>
+        <div class="prow">
+          <div><strong>10W30 / 20W50</strong><span>Frotas leves, oficinas e revendas</span></div>
+          <span class="pill">Cotação rápida</span>
+        </div>
+        <div class="prow">
+          <div><strong>Graxas e Fluidos</strong><span>Manutenção e operação contínua</span></div>
+          <span class="pill">Linha completa</span>
+        </div>
+        <div class="prow">
+          <div><strong>Baterias Moura</strong><span>Veículos leves, pesados e frotas</span></div>
+          <span class="pill">Disponível</span>
+        </div>
+        <div class="hc-stats">
+          <div class="hc-stat"><strong>B2B</strong><span>Atendimento empresarial</span></div>
+          <div class="hc-stat"><strong>AM</strong><span>Entrega Manaus</span></div>
+          <div class="hc-stat"><strong>24h</strong><span>Resposta comercial</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint" id="js-scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="mi gold">TEXACO</span><span class="mi sep">◆</span>
+    <span class="mi">UNI LUBRIFICANTES</span><span class="mi sep">◆</span>
+    <span class="mi gold">BATERIAS MOURA</span><span class="mi sep">◆</span>
+    <span class="mi">15W40 DIESEL</span><span class="mi sep">◆</span>
+    <span class="mi">10W30 · 20W50</span><span class="mi sep">◆</span>
+    <span class="mi gold">LUBRIFICANTES INDUSTRIAIS</span><span class="mi sep">◆</span>
+    <span class="mi">GRAXAS E FLUIDOS</span><span class="mi sep">◆</span>
+    <span class="mi">MANAUS — AM</span><span class="mi sep">◆</span>
+    <!-- duplicate for seamless loop -->
+    <span class="mi gold">TEXACO</span><span class="mi sep">◆</span>
+    <span class="mi">UNI LUBRIFICANTES</span><span class="mi sep">◆</span>
+    <span class="mi gold">BATERIAS MOURA</span><span class="mi sep">◆</span>
+    <span class="mi">15W40 DIESEL</span><span class="mi sep">◆</span>
+    <span class="mi">10W30 · 20W50</span><span class="mi sep">◆</span>
+    <span class="mi gold">LUBRIFICANTES INDUSTRIAIS</span><span class="mi sep">◆</span>
+    <span class="mi">GRAXAS E FLUIDOS</span><span class="mi sep">◆</span>
+    <span class="mi">MANAUS — AM</span><span class="mi sep">◆</span>
+  </div>
+</div>
+
+<!-- ═══ PRODUTOS ═══ -->
+<section id="produtos" class="section s-products">
+  <div class="container">
+    <div class="sec-head js-reveal">
+      <div class="eyebrow">Catálogo Comercial</div>
+      <h2 class="sec-title">Produtos para venda<br>recorrente e operação pesada.</h2>
+      <p class="sec-desc">
+        Monte seu pedido por tipo de motor, aplicação e volume mensal.
+        Condições especiais para empresas com compra recorrente.
+      </p>
+    </div>
+    <div class="products-grid">
+      <div class="pcard js-card">
+        <div class="pcard-visual texaco">
+          <span class="pcard-brand red">TEXACO</span>
+        </div>
+        <div class="pcard-body">
+          <h3>Linha Texaco — Premium</h3>
+          <ul>
+            <li>Óleos para veículos leves e pesados</li>
+            <li>Lubrificantes diesel API CK-4 e CJ-4</li>
+            <li>Havoline — motor a gasolina e flex</li>
+            <li>Texamatic — câmbios automáticos</li>
+            <li>Embalagens 1L, 4L, 20L e 200L</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pcard js-card">
+        <div class="pcard-visual uni">
+          <span class="pcard-brand">UNI</span>
+        </div>
+        <div class="pcard-body">
+          <h3>Linha UNI — Custo-Benefício</h3>
+          <ul>
+            <li>15W40 e 20W50 para motores diesel</li>
+            <li>Excelente relação custo-benefício</li>
+            <li>Linhas para revenda e consumo interno</li>
+            <li>Ideal para oficinas e auto centers</li>
+            <li>Graxas e fluidos especiais UNI</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pcard js-card">
+        <div class="pcard-visual moura">
+          <span class="pcard-brand blue">MOURA</span>
+        </div>
+        <div class="pcard-body">
+          <h3>Baterias Moura</h3>
+          <ul>
+            <li>Linha Free e Start — veículos leves</li>
+            <li>Linha Diesel — caminhões e ônibus</li>
+            <li>Atendimento especializado para frotas</li>
+            <li>Reposição comercial em Manaus</li>
+            <li>Garantia de fábrica em todos os modelos</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SEGMENTOS ═══ -->
+<section id="segmentos" class="section s-segments">
+  <div class="container">
+    <div class="sec-head js-reveal">
+      <div class="eyebrow">Segmentos Atendidos</div>
+      <h2 class="sec-title">Para empresas que<br>dependem da operação.</h2>
+      <p class="sec-desc">
+        Atendimento consultivo para reduzir parada de equipamento,
+        organizar compra recorrente e padronizar produtos por tipo de uso.
+      </p>
+    </div>
+    <div class="segments-grid">
+      <div class="seg-card js-card">
+        <div class="seg-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="1" y="3" width="15" height="13" rx="1"/>
+            <path d="M16 8h4l3 3v5h-7V8z"/>
+            <circle cx="5.5" cy="18.5" r="2.5"/>
+            <circle cx="18.5" cy="18.5" r="2.5"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Transportadoras</h3>
+          <p>Fornecimento contínuo para caminhões, ônibus, vans e máquinas. Condições especiais por volume e contratos de fornecimento recorrente.</p>
+        </div>
+      </div>
+      <div class="seg-card js-card">
+        <div class="seg-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Oficinas Mecânicas</h3>
+          <p>Mix completo para troca de óleo, manutenção preventiva e revenda. Produto certo para cada motor, viscosidade e norma técnica.</p>
+        </div>
+      </div>
+      <div class="seg-card js-card">
+        <div class="seg-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 20a2.4 2.4 0 0 0 2 1 2.4 2.4 0 0 0 2-1 2.4 2.4 0 0 1 2-1 2.4 2.4 0 0 1 2 1 2.4 2.4 0 0 0 2 1 2.4 2.4 0 0 0 2-1 2.4 2.4 0 0 1 2-1 2.4 2.4 0 0 1 2 1"/>
+            <path d="M4 18l-1-5h18l-2 5"/>
+            <path d="M12 2v9M8 13V7l4-5 4 5v6"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Barcos e Estaleiros</h3>
+          <p>Soluções para motores de popa e operações fluviais no Amazonas. Produtos adequados para ambiente de alta umidade e uso intenso.</p>
+        </div>
+      </div>
+      <div class="seg-card js-card">
+        <div class="seg-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 20V8l5-5v17M12 20V4l5 5v11M7 20h10M22 20V13l-5-5"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Indústrias</h3>
+          <p>Óleos industriais, graxas e fluidos especiais para manutenção de máquinas e operação contínua em todos os setores de Manaus.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<div class="s-stats">
+  <div class="stats-rail">
+    <div class="stat-col">
+      <span class="stat-num" data-count="24" data-suffix="h">24h</span>
+      <span class="stat-lbl">Resposta Comercial</span>
+    </div>
+    <div class="stat-col">
+      <span class="stat-num" data-count="3" data-suffix="+">3+</span>
+      <span class="stat-lbl">Marcas Premium</span>
+    </div>
+    <div class="stat-col">
+      <span class="stat-num" data-count="6">6</span>
+      <span class="stat-lbl">Segmentos Atendidos</span>
+    </div>
+    <div class="stat-col">
+      <span class="stat-num" data-text="B2B">B2B</span>
+      <span class="stat-lbl">Foco Empresarial</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ DIFERENCIAIS ═══ -->
+<section id="diferenciais" class="section s-diffs">
+  <div class="container">
+    <div class="sec-head js-reveal">
+      <div class="eyebrow">Por que Lubrinorte</div>
+      <h2 class="sec-title">Mais do que vender óleo:<br>ajudamos a comprar melhor.</h2>
+    </div>
+    <div class="diffs-grid">
+      <div class="diff-item js-card">
+        <span class="diff-num">01</span>
+        <div>
+          <h3>Agilidade local em Manaus</h3>
+          <p>Atendimento focado em prazo, disponibilidade e reposição. Conhecemos o mercado de Manaus e a realidade das operações regionais.</p>
+        </div>
+      </div>
+      <div class="diff-item js-card">
+        <span class="diff-num">02</span>
+        <div>
+          <h3>Compra por volume com condição especial</h3>
+          <p>Condições comerciais diferenciadas para clientes recorrentes, frotas e empresas com volume mensal definido e previsível.</p>
+        </div>
+      </div>
+      <div class="diff-item js-card">
+        <span class="diff-num">03</span>
+        <div>
+          <h3>Controle de consumo organizado</h3>
+          <p>Ajuda na organização do consumo mensal por veículo, setor ou equipamento. Reduza desperdício e preveja demanda com precisão.</p>
+        </div>
+      </div>
+      <div class="diff-item js-card">
+        <span class="diff-num">04</span>
+        <div>
+          <h3>Parceria B2B de longo prazo</h3>
+          <p>Relacionamento comercial consultivo com oficinas, indústrias e transportadoras. Seu fornecedor estratégico no Amazonas.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BANNER ═══ -->
+<div class="s-banner" id="js-banner">
+  <div class="banner-bg"></div>
+  <div class="banner-lines"></div>
+  <div class="banner-content">
+    <h2>
+      <span class="js-banner-line">FORNECIMENTO</span><br>
+      <span class="js-banner-line highlight">CONFIÁVEL</span><br>
+      <span class="js-banner-line">EM MANAUS</span>
+    </h2>
+    <p class="banner-sub">Texaco · UNI · Moura · Distribuidora B2B</p>
+  </div>
+</div>
+
+<!-- ═══ COTAÇÃO ═══ -->
+<section id="cotacao" class="s-quote">
+  <div class="quote-box js-reveal">
+    <div class="ql">
+      <div class="eyebrow" style="color:var(--gold);">Cotação Rápida</div>
+      <h2 class="sec-title">Receba preço,<br>prazo e disponibilidade.</h2>
+      <p class="desc">
+        Preencha o formulário ou chame no WhatsApp.
+        Informe produto, quantidade e bairro de entrega para uma cotação mais precisa.
+      </p>
+      <a class="btn btn-gold" href="https://wa.me/5592362221479" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Chamar no WhatsApp
+      </a>
+      <div style="margin-top:20px;display:flex;align-items:center;gap:12px;">
+        <a href="tel:+559236221479" style="display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;text-decoration:none;font-family:var(--ff-m);letter-spacing:.04em;transition:color .2s;" onmouseover="this.style.color='var(--gold2)'" onmouseout="this.style.color='var(--muted)'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.58 3.38 2 2 0 0 1 3.55 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.54a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (92) 3622-1479
+        </a>
+        <span style="color:var(--line);font-size:12px;">|</span>
+        <a href="https://wa.me/5592362221479" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:8px;color:var(--muted);font-size:14px;text-decoration:none;font-family:var(--ff-m);letter-spacing:.04em;transition:color .2s;" onmouseover="this.style.color='#20c763'" onmouseout="this.style.color='var(--muted)'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+    </div>
+
+    <form class="form" id="js-form" novalidate>
+      <div class="form-row">
+        <input type="text"  name="nome"     placeholder="Nome / Empresa"   required>
+        <input type="tel"   name="telefone" placeholder="WhatsApp"         required>
+      </div>
+      <input type="email" name="email"   placeholder="E-mail (opcional)">
+      <select name="produto">
+        <option value="">Produto de interesse</option>
+        <option>Texaco 15W40 Diesel</option>
+        <option>Texaco 10W30 / 20W50</option>
+        <option>UNI 15W40 Diesel</option>
+        <option>UNI 10W30 / 20W50</option>
+        <option>Graxas e fluidos especiais</option>
+        <option>Baterias Moura</option>
+        <option>Outro produto</option>
+      </select>
+      <textarea name="obs" rows="4" placeholder="Quantidade mensal, aplicação e bairro de entrega em Manaus"></textarea>
+      <button type="submit" class="form-btn" id="js-submit">Enviar Solicitação de Cotação</button>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <a class="logo" href="#">
+      <div class="logo-svg-wrap">
+        <svg viewBox="0 0 46 46" width="46" height="46" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M23 2 C23 2 4 20 4 31 C4 40.5 12.5 45 23 45 C33.5 45 42 40.5 42 31 C42 20 23 2 23 2Z" fill="#0f2d6e"/>
+          <path d="M33 34 C33 34 42 29 42 31 C42 40.5 33.5 45 23 45 L23 38 C28 38 33 36.5 33 34Z" fill="#c8161d"/>
+          <rect x="14" y="16" width="6"  height="20" rx="1" fill="white"/>
+          <rect x="14" y="30" width="16" height="6"  rx="1" fill="white"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <strong>LUBRI<em>NORTE</em></strong>
+        <small>MANAUS • ÓLEOS • LUBRIFICANTES • BATERIAS</small>
+      </div>
+    </a>
+    <div class="footer-right">
+      <span>Manaus — Amazonas</span>
+      <span>📞 (92) 3622-1479 &nbsp;|&nbsp; 💬 WhatsApp: (92) 3622-1479</span>
+      <span>Atendimento B2B: empresas, oficinas, frotas e indústrias</span>
+      <span style="margin-top:4px;color:rgba(255,255,255,.25);">© 2026 Lubrinorte Manaus. Todos os direitos reservados.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a class="wa-float" href="https://wa.me/5592362221479" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+  WhatsApp
+</a>
+
+<!-- ═══ SCRIPTS ═══ -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+
+<script>
+/* ── MOBILE NAV ── */
+const mobileNav = document.getElementById('js-mobile-nav');
+document.getElementById('js-hamburger').addEventListener('click', () => mobileNav.classList.add('open'));
+document.getElementById('js-close-nav').addEventListener('click', closeMobileNav);
+function closeMobileNav() { mobileNav.classList.remove('open'); }
+
+/* ── FALLBACK: se GSAP não carregou, mostra conteúdo normalmente ── */
+if (typeof gsap === 'undefined') {
+  console.warn('GSAP not loaded — animations disabled');
+} else {
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* ── LENIS (com try/catch para não quebrar se CDN falhar) ── */
+  let lenis;
+  try {
+    lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smooth: true,
+      smoothTouch: false,
+    });
+    gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+    gsap.ticker.lagSmoothing(0);
+    lenis.on('scroll', ScrollTrigger.update);
+  } catch(e) {
+    console.warn('Lenis not available:', e);
+  }
+
+  /* ── HEADER SOLID ON SCROLL ── */
+  const header = document.getElementById('js-header');
+  ScrollTrigger.create({
+    start: '80px top',
+    onEnter:     () => header.classList.add('solid'),
+    onLeaveBack: () => header.classList.remove('solid'),
+  });
+
+  /* ── CUSTOM CURSOR ── */
+  const cursorEl = document.getElementById('js-cursor');
+  const ringEl   = document.getElementById('js-ring');
+  if (window.matchMedia('(min-width:900px)').matches && cursorEl) {
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', (e) => {
+      mx = e.clientX; my = e.clientY;
+      cursorEl.style.left = mx + 'px'; cursorEl.style.top = my + 'px';
+    });
+    (function animRing() {
+      rx += (mx - rx) * 0.11; ry += (my - ry) * 0.11;
+      ringEl.style.left = rx + 'px'; ringEl.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    })();
+    document.querySelectorAll('a,button,.prow,.pcard,.seg-card,.diff-item').forEach(el => {
+      el.addEventListener('mouseenter', () => { ringEl.style.width = '52px'; ringEl.style.height = '52px'; ringEl.style.borderColor = 'rgba(201,168,76,.7)'; });
+      el.addEventListener('mouseleave', () => { ringEl.style.width = '36px'; ringEl.style.height = '36px'; ringEl.style.borderColor = 'rgba(201,168,76,.45)'; });
+    });
+  }
+
+  /* ── HERO ENTRANCE — usando gsap.from() sem opacity:0 no CSS ── */
+  const heroTl = gsap.timeline({ delay: 0.2 });
+
+  heroTl
+    .from('#js-badge', {
+      opacity: 0, y: 20, duration: 0.65, ease: 'power3.out'
+    })
+    .from('.hero-title .line-inner', {
+      y: '105%', duration: 1.0, ease: 'power4.out', stagger: 0.1
+    }, '-=0.35')
+    .from('#js-sub', {
+      opacity: 0, y: 20, duration: 0.75, ease: 'power3.out'
+    }, '-=0.55')
+    .from('#js-ctas', {
+      opacity: 0, y: 20, duration: 0.6, ease: 'back.out(1.7)'
+    }, '-=0.45')
+    .from('#js-visual', {
+      opacity: 0, x: 40, duration: 0.9, ease: 'power3.out'
+    }, '-=0.7')
+    .from('#js-scroll-hint', {
+      opacity: 0, duration: 0.5
+    }, '+=0.1');
+
+  /* Parallax hero bg */
+  gsap.to('#js-hero-bg', {
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1.5 },
+    y: '20%', ease: 'none',
+  });
+
+  /* ── REVEAL HELPERS — usa gsap.from() (sem CSS opacity:0) ── */
+  document.querySelectorAll('.js-reveal').forEach((el) => {
+    gsap.from(el, {
+      scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+      y: 40, opacity: 0, duration: 0.85, ease: 'power3.out',
+    });
+  });
+
+  document.querySelectorAll('.js-card').forEach((card, i) => {
+    gsap.from(card, {
+      scrollTrigger: { trigger: card, start: 'top 90%', once: true },
+      y: 50, opacity: 0, duration: 0.75, ease: 'power3.out',
+      delay: (i % 4) * 0.1,
+    });
+  });
+
+  /* ── STATS COUNTER ── */
+  document.querySelectorAll('.stat-num').forEach((el) => {
+    const count  = el.dataset.count;
+    const suffix = el.dataset.suffix || '';
+    const text   = el.dataset.text;
+
+    if (text) {
+      /* B2B — anima só entrada */
+      gsap.from(el, {
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+        opacity: 0, y: 30, duration: 0.6, ease: 'power3.out',
+      });
+      return;
+    }
+
+    if (!count) return;
+
+    ScrollTrigger.create({
+      trigger: el, start: 'top 85%', once: true,
+      onEnter: () => {
+        const obj = { val: 0 };
+        gsap.to(obj, {
+          val: parseFloat(count),
+          duration: 2.0,
+          ease: 'power2.out',
+          onUpdate() { el.textContent = Math.round(obj.val) + suffix; },
+        });
+        gsap.from(el, { opacity: 0, y: 30, duration: 0.6, ease: 'power3.out' });
+      },
+    });
+  });
+
+  /* ── BANNER ── */
+  gsap.from('.js-banner-line', {
+    scrollTrigger: { trigger: '#js-banner', start: 'top 75%', once: true },
+    y: 60, opacity: 0, duration: 0.9, ease: 'power4.out', stagger: 0.12,
+  });
+  gsap.from('.banner-sub', {
+    scrollTrigger: { trigger: '#js-banner', start: 'top 65%', once: true },
+    opacity: 0, duration: 0.7, delay: 0.35,
+  });
+
+} /* end GSAP block */
+
+/* ── FORM ── */
+document.getElementById('js-form').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('js-submit');
+  btn.textContent = '✓ Solicitação enviada com sucesso!';
+  btn.style.background = 'linear-gradient(135deg,#20c763,#16a34a)';
+  btn.style.color = '#fff';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = 'Enviar Solicitação de Cotação';
+    btn.style.background = ''; btn.style.color = '';
+    btn.disabled = false;
+    e.target.reset();
+  }, 4000);
+});
+</script>
+</body>
+</html>

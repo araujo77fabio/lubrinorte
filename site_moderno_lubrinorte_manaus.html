@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lubrinorte Manaus | Óleos Texaco e UNI</title>
+  <meta name="description" content="Distribuidora de óleos Texaco e UNI em Manaus. Lubrificantes para frotas, oficinas, caminhões, barcos, indústrias e transportadoras." />
+  <style>
+    :root{
+      --black:#070707;
+      --dark:#111114;
+      --soft:#17171c;
+      --gold:#d8b14a;
+      --gold2:#f0d47a;
+      --red:#c8161d;
+      --white:#ffffff;
+      --muted:#b8b8c2;
+      --bg:#f6f6f3;
+      --card:#ffffff;
+      --line:rgba(255,255,255,.12);
+      --shadow:0 22px 60px rgba(0,0,0,.18);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: Inter, Arial, Helvetica, sans-serif;
+      background:var(--bg);
+      color:#171717;
+    }
+
+    .topbar{
+      background:#000;
+      color:#d7d7d7;
+      padding:9px 6%;
+      font-size:13px;
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(7,7,7,.88);
+      backdrop-filter: blur(14px);
+      border-bottom:1px solid rgba(255,255,255,.08);
+      padding:18px 6%;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:white;
+      text-decoration:none;
+    }
+
+    .mark{
+      width:42px;
+      height:42px;
+      border-radius:13px;
+      background:linear-gradient(135deg,var(--gold),#8c6a13);
+      display:grid;
+      place-items:center;
+      color:#050505;
+      font-weight:900;
+      box-shadow:0 8px 20px rgba(216,177,74,.25);
+    }
+
+    .logo strong{display:block;font-size:18px;letter-spacing:.4px}
+    .logo span{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:24px;
+    }
+
+    nav a{
+      color:#e9e9e9;
+      text-decoration:none;
+      font-size:14px;
+      transition:.2s;
+    }
+
+    nav a:hover{color:var(--gold2)}
+
+    .nav-cta{
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#111!important;
+      padding:11px 17px;
+      border-radius:999px;
+      font-weight:800;
+    }
+
+    .hero{
+      min-height:86vh;
+      color:white;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(216,177,74,.25), transparent 32%),
+        radial-gradient(circle at 84% 25%, rgba(200,22,29,.25), transparent 28%),
+        linear-gradient(135deg,#050505 0%, #121216 50%, #060606 100%);
+      padding:82px 6% 64px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      right:-120px;
+      bottom:-120px;
+      width:520px;
+      height:520px;
+      background:linear-gradient(135deg,rgba(216,177,74,.18),rgba(200,22,29,.08));
+      border-radius:50%;
+      filter:blur(3px);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:44px;
+      align-items:center;
+      position:relative;
+      z-index:2;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      color:#f5f5f5;
+      padding:9px 14px;
+      border-radius:999px;
+      font-size:13px;
+      margin-bottom:24px;
+    }
+
+    .dot{width:8px;height:8px;border-radius:50%;background:var(--gold)}
+
+    h1{
+      font-size:clamp(40px,5.8vw,76px);
+      line-height:.98;
+      margin:0;
+      letter-spacing:-2.8px;
+    }
+
+    .gradient-text{
+      background:linear-gradient(135deg,#fff,var(--gold2));
+      -webkit-background-clip:text;
+      color:transparent;
+    }
+
+    .hero p{
+      margin:24px 0 0;
+      max-width:690px;
+      color:#d4d4d8;
+      font-size:19px;
+      line-height:1.65;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:14px;
+      flex-wrap:wrap;
+      margin-top:34px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      min-height:52px;
+      padding:0 22px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:850;
+      transition:.2s;
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#111;
+      box-shadow:0 16px 35px rgba(216,177,74,.24);
+    }
+
+    .btn-secondary{
+      color:white;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+    }
+
+    .btn:hover{transform:translateY(-2px)}
+
+    .hero-card{
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:28px;
+      padding:28px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .product-stack{
+      display:grid;
+      gap:14px;
+    }
+
+    .product-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.11);
+      border-radius:18px;
+      padding:18px;
+    }
+
+    .product-row strong{font-size:18px}
+    .product-row span{color:#cfcfd5;font-size:13px}
+    .pill{
+      background:rgba(216,177,74,.16);
+      border:1px solid rgba(216,177,74,.35);
+      color:var(--gold2);
+      border-radius:999px;
+      padding:7px 10px;
+      font-size:12px;
+      white-space:nowrap;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .stat{
+      background:rgba(0,0,0,.22);
+      border:1px solid rgba(255,255,255,.1);
+      padding:18px;
+      border-radius:18px;
+    }
+
+    .stat strong{display:block;color:var(--gold2);font-size:25px}
+    .stat span{color:#cfcfd5;font-size:12px}
+
+    section{padding:82px 6%}
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:24px;
+      margin-bottom:34px;
+    }
+
+    .eyebrow{
+      color:var(--red);
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-size:12px;
+      margin-bottom:10px;
+    }
+
+    h2{
+      font-size:clamp(30px,4vw,48px);
+      line-height:1.05;
+      letter-spacing:-1.5px;
+      margin:0;
+    }
+
+    .lead{
+      max-width:670px;
+      color:#555;
+      line-height:1.7;
+      font-size:17px;
+      margin:0;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+      gap:20px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius:24px;
+      padding:28px;
+      box-shadow:0 14px 35px rgba(0,0,0,.06);
+      transition:.2s;
+    }
+
+    .card:hover{transform:translateY(-4px);box-shadow:0 20px 45px rgba(0,0,0,.1)}
+    .icon{
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      background:linear-gradient(135deg,#111,#34343a);
+      color:var(--gold2);
+      display:grid;
+      place-items:center;
+      font-size:23px;
+      margin-bottom:18px;
+    }
+
+    .card h3{margin:0 0 10px;font-size:20px}
+    .card p{margin:0;color:#666;line-height:1.55}
+
+    .dark-section{
+      background:#0b0b0d;
+      color:white;
+    }
+
+    .dark-section .lead{color:#c9c9cf}
+    .dark-section .card{
+      background:linear-gradient(180deg,#17171b,#101013);
+      color:white;
+      border:1px solid rgba(255,255,255,.09);
+    }
+    .dark-section .card p{color:#c9c9cf}
+
+    .catalog{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      gap:18px;
+    }
+
+    .catalog-item{
+      background:white;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,.07);
+      box-shadow:0 12px 32px rgba(0,0,0,.06);
+    }
+
+    .catalog-top{
+      height:130px;
+      background:
+        linear-gradient(135deg,rgba(7,7,7,.9),rgba(7,7,7,.68)),
+        radial-gradient(circle at 72% 20%, rgba(216,177,74,.5), transparent 30%);
+      color:white;
+      padding:20px;
+      display:flex;
+      align-items:end;
+    }
+
+    .catalog-top strong{font-size:24px}
+    .catalog-body{padding:22px}
+    .catalog-body ul{padding-left:18px;margin:0;color:#5b5b5b;line-height:1.8}
+
+    .quote-box{
+      display:grid;
+      grid-template-columns:.9fr 1.1fr;
+      gap:32px;
+      align-items:center;
+      background:
+        radial-gradient(circle at 12% 20%,rgba(216,177,74,.25),transparent 30%),
+        linear-gradient(135deg,#101012,#030303);
+      color:white;
+      border-radius:34px;
+      padding:42px;
+      box-shadow:var(--shadow);
+    }
+
+    .quote-box p{color:#cfcfd5;line-height:1.65}
+    form{display:grid;gap:13px}
+    input,select,textarea{
+      width:100%;
+      padding:16px 15px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.08);
+      color:white;
+      outline:none;
+      font-size:15px;
+    }
+
+    input::placeholder,textarea::placeholder{color:#c9c9cf}
+    select option{color:#111}
+    button{
+      border:0;
+      border-radius:14px;
+      padding:17px;
+      background:linear-gradient(135deg,var(--gold2),var(--gold));
+      color:#111;
+      font-weight:900;
+      font-size:16px;
+      cursor:pointer;
+    }
+
+    .floating-whatsapp{
+      position:fixed;
+      right:22px;
+      bottom:22px;
+      z-index:100;
+      background:#20c763;
+      color:white;
+      text-decoration:none;
+      padding:15px 18px;
+      border-radius:999px;
+      font-weight:900;
+      box-shadow:0 16px 40px rgba(0,0,0,.28);
+    }
+
+    footer{
+      background:#050505;
+      color:#bdbdc6;
+      padding:34px 6%;
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+      font-size:14px;
+    }
+
+    footer strong{color:white}
+
+    @media(max-width:900px){
+      nav{display:none}
+      .hero-grid,.quote-box{grid-template-columns:1fr}
+      .hero{padding-top:58px}
+      .section-head{display:block}
+      .lead{margin-top:14px}
+      .stats{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <span>Manaus - AM | Atendimento B2B para empresas, oficinas, frotas e indústrias</span>
+    <span>Solicite cotação pelo WhatsApp</span>
+  </div>
+
+  <header>
+    <a class="logo" href="#">
+      <div class="mark">L</div>
+      <div>
+        <strong>Lubrinorte Manaus</strong>
+        <span>Texaco • UNI • Baterias • Lubrificantes</span>
+      </div>
+    </a>
+
+    <nav>
+      <a href="#produtos">Produtos</a>
+      <a href="#segmentos">Segmentos</a>
+      <a href="#diferenciais">Diferenciais</a>
+      <a href="#cotacao" class="nav-cta">Pedir cotação</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-grid">
+        <div>
+          <div class="badge"><span class="dot"></span> Distribuição profissional em Manaus</div>
+          <h1>Óleos <span class="gradient-text">Texaco e UNI</span> para quem não pode parar.</h1>
+          <p>
+            Fornecimento ágil de lubrificantes, graxas, fluidos e baterias para transportadoras,
+            oficinas, auto centers, barcos, estaleiros, indústrias e frotas comerciais.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#cotacao">Solicitar cotação</a>
+            <a class="btn btn-secondary" href="#produtos">Ver produtos</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="product-stack">
+            <div class="product-row">
+              <div><strong>15W40 Diesel</strong><br><span>Caminhões, ônibus e máquinas</span></div>
+              <div class="pill">Alta demanda</div>
+            </div>
+            <div class="product-row">
+              <div><strong>10W30 / 20W50</strong><br><span>Frotas, oficinas e revendas</span></div>
+              <div class="pill">Cotação rápida</div>
+            </div>
+            <div class="product-row">
+              <div><strong>Graxas e Fluidos</strong><br><span>Manutenção e operação contínua</span></div>
+              <div class="pill">Linha completa</div>
+            </div>
+          </div>
+
+          <div class="stats">
+            <div class="stat"><strong>B2B</strong><span>Atendimento empresarial</span></div>
+            <div class="stat"><strong>AM</strong><span>Entrega em Manaus</span></div>
+            <div class="stat"><strong>24h</strong><span>Resposta comercial</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="produtos">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Catálogo comercial</div>
+          <h2>Produtos para venda recorrente e operação pesada.</h2>
+        </div>
+        <p class="lead">
+          Monte seu pedido por tipo de motor, aplicação, volume mensal e segmento. Ideal para empresas que precisam de previsibilidade, preço e entrega.
+        </p>
+      </div>
+
+      <div class="catalog">
+        <div class="catalog-item">
+          <div class="catalog-top"><strong>Texaco</strong></div>
+          <div class="catalog-body">
+            <ul>
+              <li>Óleos para veículos leves e pesados</li>
+              <li>Lubrificantes diesel</li>
+              <li>Produtos para frotas e oficinas</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="catalog-item">
+          <div class="catalog-top"><strong>UNI</strong></div>
+          <div class="catalog-body">
+            <ul>
+              <li>Excelente custo-benefício</li>
+              <li>Linhas para revenda e consumo interno</li>
+              <li>Opções para oficinas e auto centers</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="catalog-item">
+          <div class="catalog-top"><strong>Baterias Moura</strong></div>
+          <div class="catalog-body">
+            <ul>
+              <li>Veículos leves e pesados</li>
+              <li>Atendimento para frotas</li>
+              <li>Reposição comercial</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="segmentos" class="dark-section">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Segmentos atendidos</div>
+          <h2>Lubrificantes para empresas que dependem da operação.</h2>
+        </div>
+        <p class="lead">
+          Atendimento consultivo para reduzir parada de equipamento, organizar compra recorrente e padronizar produtos por tipo de uso.
+        </p>
+      </div>
+
+      <div class="cards">
+        <div class="card"><div class="icon">🚚</div><h3>Transportadoras</h3><p>Fornecimento para caminhões, ônibus, vans, máquinas e frotas comerciais.</p></div>
+        <div class="card"><div class="icon">🔧</div><h3>Oficinas</h3><p>Mix de produtos para troca de óleo, manutenção preventiva e revenda.</p></div>
+        <div class="card"><div class="icon">⛴️</div><h3>Barcos e estaleiros</h3><p>Soluções para motores e operações fluviais no Amazonas.</p></div>
+        <div class="card"><div class="icon">🏭</div><h3>Indústrias</h3><p>Produtos para manutenção, máquinas e operação contínua.</p></div>
+      </div>
+    </section>
+
+    <section id="diferenciais">
+      <div class="section-head">
+        <div>
+          <div class="eyebrow">Por que escolher</div>
+          <h2>Mais do que vender óleo: ajudamos sua empresa a comprar melhor.</h2>
+        </div>
+      </div>
+
+      <div class="cards">
+        <div class="card"><div class="icon">⚡</div><h3>Agilidade local</h3><p>Atendimento em Manaus com foco em prazo, disponibilidade e reposição.</p></div>
+        <div class="card"><div class="icon">📦</div><h3>Compra por volume</h3><p>Condição comercial para clientes recorrentes, frotas e empresas.</p></div>
+        <div class="card"><div class="icon">📊</div><h3>Controle de consumo</h3><p>Ajuda na organização do consumo mensal por veículo, setor ou equipamento.</p></div>
+        <div class="card"><div class="icon">🤝</div><h3>Parceria B2B</h3><p>Relacionamento comercial voltado a oficinas, indústrias e transportadoras.</p></div>
+      </div>
+    </section>
+
+    <section id="cotacao">
+      <div class="quote-box">
+        <div>
+          <div class="eyebrow">Cotação rápida</div>
+          <h2>Receba preço, prazo e disponibilidade.</h2>
+          <p>
+            Preencha os dados ou chame no WhatsApp. Informe o produto, quantidade,
+            aplicação e bairro de entrega para uma cotação mais precisa.
+          </p>
+          <a class="btn btn-primary" href="https://wa.me/5592999999999" target="_blank">Chamar no WhatsApp</a>
+        </div>
+
+        <form>
+          <input type="text" placeholder="Nome / Empresa" required>
+          <input type="tel" placeholder="WhatsApp" required>
+          <input type="email" placeholder="E-mail">
+          <select>
+            <option>Produto de interesse</option>
+            <option>Texaco 15W40</option>
+            <option>UNI 15W40</option>
+            <option>10W30 / 20W50</option>
+            <option>Graxas e fluidos</option>
+            <option>Baterias Moura</option>
+            <option>Outro produto</option>
+          </select>
+          <textarea rows="4" placeholder="Quantidade mensal, aplicação e local de entrega"></textarea>
+          <button type="submit">Enviar solicitação</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div><strong>Lubrinorte Manaus</strong><br>Distribuidora de óleos, lubrificantes e baterias.</div>
+    <div>Manaus - AM<br>Atendimento para empresas, oficinas, frotas e indústrias.</div>
+  </footer>
+
+  <a class="floating-whatsapp" href="https://wa.me/5592999999999" target="_blank">WhatsApp</a>
+</body>
+</html>

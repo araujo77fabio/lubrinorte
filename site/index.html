@@ -461,6 +461,147 @@ a { color: inherit; }
   .s-banner { height: 220px; }
   .footer-right { text-align: left; }
 }
+
+/* ══════════════════════════════════════════════════════════ */
+/* TRUCK FLEET OILS SECTION — CINEMATOGRAPHIC HERO */
+/* ══════════════════════════════════════════════════════════ */
+
+.truck-fleet-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--black);
+  padding: 80px 6%;
+}
+
+.truck-fleet-hero-bg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: url('/external_images/uni/lubrinorte_truck_fleet_hero-5C9GxXvK8Evput9BDHapzk.webp') center/cover fixed;
+  z-index: 1;
+  will-change: transform;
+}
+
+.truck-fleet-overlay {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(7,7,7,.75) 0%, rgba(200,22,29,.25) 100%);
+  z-index: 2;
+  backdrop-filter: brightness(0.85);
+}
+
+.truck-fleet-content {
+  position: relative; z-index: 3;
+  width: 100%; max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.truck-fleet-hero { text-align: center; display: flex; flex-direction: column; gap: 2rem; }
+
+.truck-fleet-title {
+  font-family: var(--ff-d);
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+  color: var(--white);
+  word-spacing: 100vw;
+  overflow: hidden;
+}
+
+.truck-fleet-title span {
+  display: inline-block;
+  overflow: hidden;
+  clip-path: inset(0 100% 0 0);
+}
+
+.truck-fleet-title .tf-accent { color: var(--gold2); text-shadow: 0 0 20px rgba(201,168,76,.3); }
+
+.truck-fleet-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  line-height: 1.8;
+  color: rgba(255,255,255,.7);
+  max-width: 700px;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+.truck-fleet-benefits {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.benefit-card {
+  background: rgba(255,255,255,.08);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(201,168,76,.2);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  transition: all .35s cubic-bezier(.23,1,.32,1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.benefit-card:hover {
+  border-color: var(--gold);
+  background: rgba(255,255,255,.12);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(201,168,76,.15);
+}
+
+.benefit-icon {
+  width: 60px; height: 60px;
+  margin: 0 auto 1rem;
+  background: linear-gradient(135deg, var(--gold), var(--red));
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.benefit-title { font-size: 1.2rem; font-weight: 600; color: var(--white); margin-bottom: .8rem; }
+.benefit-description { font-size: .95rem; color: rgba(255,255,255,.75); line-height: 1.6; }
+
+.truck-fleet-cta { display: flex; gap: 1.5rem; justify-content: center; margin: 2rem 0; flex-wrap: wrap; }
+
+.truck-fleet-stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 2rem;
+  margin: 4rem 0;
+  padding: 3rem 0;
+  border-top: 1px solid rgba(201,168,76,.2);
+  border-bottom: 1px solid rgba(201,168,76,.2);
+}
+
+.stat-item { text-align: center; }
+.stat-number { font-family: var(--ff-d); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(--gold2); line-height: 1; margin-bottom: .5rem; text-shadow: 0 0 30px rgba(201,168,76,.3); }
+.stat-label { font-size: clamp(.9rem, 2vw, 1.1rem); color: rgba(255,255,255,.7); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; font-family: var(--ff-mono); }
+
+@media (max-width: 1100px) { .truck-fleet-benefits { grid-template-columns: repeat(2,1fr); } .truck-fleet-stats { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 768px) {
+  .truck-fleet-section { padding: 60px 6%; }
+  .truck-fleet-hero-bg { background-attachment: scroll; }
+  .truck-fleet-benefits { grid-template-columns: 1fr; }
+  .truck-fleet-cta { flex-direction: column; }
+  .truck-fleet-cta a, .truck-fleet-cta button { width: 100%; }
+  .truck-fleet-stats { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 
@@ -578,6 +719,70 @@ a { color: inherit; }
   <div class="scroll-hint" id="js-scroll-hint">
     <span>scroll</span>
     <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TRUCK FLEET OILS SECTION
+═══════════════════════════════════════ -->
+<section class="truck-fleet-section" id="truck-fleet-section">
+  <div class="truck-fleet-hero-bg" aria-hidden="true"></div>
+  <div class="truck-fleet-overlay" aria-hidden="true"></div>
+
+  <div class="truck-fleet-content">
+    <div class="truck-fleet-hero">
+      <h2 class="truck-fleet-title">
+        <span>ÓLEOS PARA</span>
+        <span>FROTAS DE</span>
+        <span>CAMINHÕES<span class="tf-accent">.</span></span>
+      </h2>
+      <p class="truck-fleet-subtitle">
+        Soluções premium de lubrificação para frotas pesadas. Desenvolvidos especialmente para as condições extremas das rodovias brasileiras, garantindo máximo desempenho, economia de combustível e durabilidade excepcional.
+      </p>
+    </div>
+
+    <div class="truck-fleet-benefits">
+      <div class="benefit-card" tabindex="0">
+        <div class="benefit-icon">⚡</div>
+        <h3 class="benefit-title">Durabilidade em Longa Distância</h3>
+        <p class="benefit-description">Óleo de longa duração que mantém suas propriedades mesmo após milhares de quilômetros.</p>
+      </div>
+      <div class="benefit-card" tabindex="0">
+        <div class="benefit-icon">🛡️</div>
+        <h3 class="benefit-title">Proteção Máxima para Motores Diesel</h3>
+        <p class="benefit-description">Fórmula especial para proteger contra desgaste, corrosão e formação de depósitos.</p>
+      </div>
+      <div class="benefit-card" tabindex="0">
+        <div class="benefit-icon">⛽</div>
+        <h3 class="benefit-title">Economia de Combustível</h3>
+        <p class="benefit-description">Reduz a resistência do motor, resultando em até 3-5% de economia de diesel.</p>
+      </div>
+      <div class="benefit-card" tabindex="0">
+        <div class="benefit-icon">📞</div>
+        <h3 class="benefit-title">Suporte Técnico 24h</h3>
+        <p class="benefit-description">Equipe disponível 24/7 para orientação sobre manutenção preventiva.</p>
+      </div>
+    </div>
+
+    <div class="truck-fleet-cta">
+      <a class="btn btn-gold" href="#cotacao">Solicitar Cotação para Frota</a>
+      <a class="btn btn-ghost" href="#cotacao" onclick="document.querySelector('[name=produto]').value='Especificações Técnicas'; return false;">Ver Especificações</a>
+    </div>
+
+    <div class="truck-fleet-stats">
+      <div class="stat-item">
+        <div class="stat-number" data-target="350">0</div>
+        <div class="stat-label">Mil km de Confiabilidade</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="2850">0</div>
+        <div class="stat-label">Frotas Atendidas</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number" data-target="98">0</div>
+        <div class="stat-label">% Retenção de Clientes</div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1060,6 +1265,84 @@ document.getElementById('js-form').addEventListener('submit', (e) => {
     e.target.reset();
   }, 4000);
 });
+
+/* ═══════════════════════════════════════════════════════════
+   TRUCK FLEET SECTION — GSAP ANIMATIONS
+═══════════════════════════════════════════════════════════ */
+if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+
+  /* Hero Title Reveal */
+  document.querySelectorAll('.truck-fleet-title span').forEach((span, i) => {
+    gsap.from(span, {
+      scrollTrigger: { trigger: '.truck-fleet-section', start: 'top center', once: true },
+      clipPath: 'inset(0 100% 0 0)',
+      duration: 0.8,
+      ease: 'power4.out',
+      delay: i * 0.15,
+    });
+  });
+
+  /* Subtitle Fade */
+  gsap.from('.truck-fleet-subtitle', {
+    scrollTrigger: { trigger: '.truck-fleet-section', start: 'top center', once: true },
+    opacity: 0, y: 30,
+    duration: 0.75,
+    ease: 'power3.out',
+    delay: 0.4,
+  });
+
+  /* Benefit Cards Stagger */
+  document.querySelectorAll('.benefit-card').forEach((card, i) => {
+    gsap.from(card, {
+      scrollTrigger: { trigger: '.truck-fleet-benefits', start: 'top 80%', once: true },
+      opacity: 0, y: 40,
+      duration: 0.6,
+      ease: 'power3.out',
+      delay: i * 0.12,
+    });
+  });
+
+  /* CTA Buttons */
+  gsap.from('.truck-fleet-cta', {
+    scrollTrigger: { trigger: '.truck-fleet-cta', start: 'top 85%', once: true },
+    opacity: 0, y: 30,
+    duration: 0.75,
+    ease: 'power3.out',
+    delay: 0.3,
+  });
+
+  /* Stats Counter */
+  document.querySelectorAll('.stat-number').forEach((el, i) => {
+    const target = parseInt(el.getAttribute('data-target'), 10);
+    gsap.from(el, {
+      scrollTrigger: { trigger: '.truck-fleet-stats', start: 'top 75%', once: true },
+      innerHTML: 0,
+      duration: 2,
+      ease: 'power2.out',
+      snap: { innerHTML: 1 },
+      delay: i * 0.2,
+      onUpdate: () => { el.innerHTML = Math.round(gsap.getProperty(el, 'innerHTML')) + (target <= 100 ? '%' : ''); },
+    });
+  });
+
+  /* Parallax Background */
+  gsap.to('.truck-fleet-hero-bg', {
+    scrollTrigger: {
+      trigger: '.truck-fleet-section',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1.5,
+    },
+    y: -window.innerHeight * 0.15,
+    ease: 'none',
+  });
+
+  /* Button Hover */
+  document.querySelectorAll('.truck-fleet-cta .btn').forEach(btn => {
+    btn.addEventListener('mouseenter', () => gsap.to(btn, { scale: 1.05, duration: 0.3 }));
+    btn.addEventListener('mouseleave', () => gsap.to(btn, { scale: 1, duration: 0.3 }));
+  });
+}
 </script>
 </body>
 </html>

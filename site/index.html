@@ -482,7 +482,7 @@ a { color: inherit; }
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
-  background: url('./external_images/uni/lubrinorte_truck_fleet_hero-5C9GxXvK8Evput9BDHapzk.webp') center/cover fixed;
+  background: url('./external_images/uni/lubrinorte_truck_fleet_hero-5C9GxXvK8Evput9BDHapzk.webp') left 30% bottom 10% / 180% auto fixed;
   z-index: 1;
   will-change: transform;
 }
@@ -593,14 +593,21 @@ a { color: inherit; }
 .stat-number { font-family: var(--ff-d); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(--gold2); line-height: 1; margin-bottom: .5rem; text-shadow: 0 0 30px rgba(201,168,76,.3); }
 .stat-label { font-size: clamp(.9rem, 2vw, 1.1rem); color: rgba(255,255,255,.7); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; font-family: var(--ff-mono); }
 
-@media (max-width: 1100px) { .truck-fleet-benefits { grid-template-columns: repeat(2,1fr); } .truck-fleet-stats { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 1100px) {
+  .truck-fleet-benefits { grid-template-columns: repeat(2,1fr); }
+  .truck-fleet-stats { grid-template-columns: repeat(2,1fr); }
+  .truck-fleet-hero-bg { background: url('./external_images/uni/lubrinorte_truck_fleet_hero-5C9GxXvK8Evput9BDHapzk.webp') left 20% bottom 5% / 200% auto scroll; }
+}
 @media (max-width: 768px) {
   .truck-fleet-section { padding: 60px 6%; }
-  .truck-fleet-hero-bg { background-attachment: scroll; }
+  .truck-fleet-hero-bg { background: url('./external_images/uni/lubrinorte_truck_fleet_hero-5C9GxXvK8Evput9BDHapzk.webp') left 10% bottom 0% / 250% auto scroll; }
   .truck-fleet-benefits { grid-template-columns: 1fr; }
   .truck-fleet-cta { flex-direction: column; }
   .truck-fleet-cta a, .truck-fleet-cta button { width: 100%; }
   .truck-fleet-stats { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .truck-fleet-hero-bg { background: url('./external_images/uni/lubrinorte_truck_fleet_hero-5C9GxXvK8Evput9BDHapzk.webp') left 5% center / 300% auto scroll; }
 }
 </style>
 </head>

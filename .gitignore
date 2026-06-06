@@ -8,3 +8,4 @@ build/
 .netlify/
 .cache/
 .claude/
+claude-code-subagents/

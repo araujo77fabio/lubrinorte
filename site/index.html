@@ -1476,6 +1476,67 @@ document.addEventListener('click', function(e) {
     }
   }
 });
+
+// LOGIN HANDLER
+(function() {
+  const loginForm = document.getElementById('login-form');
+  if (!loginForm) return;
+
+  loginForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const emailInput = loginForm.querySelector('input[type="email"]');
+    const passwordInput = loginForm.querySelector('input[type="password"]');
+    const submitButton = loginForm.querySelector('button[type="submit"]');
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+
+    const validEmail = 'admin@lubrinorte.com';
+    const validPassword = 'Lubrinorte@2026';
+
+    const errorMsg = loginForm.querySelector('.login-error');
+    if (errorMsg) errorMsg.remove();
+
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Autenticando...';
+    submitButton.disabled = true;
+
+    setTimeout(function() {
+      if (email === validEmail && password === validPassword) {
+        sessionStorage.setItem('lubrinorte_user', JSON.stringify({
+          email: email,
+          loggedIn: true,
+          timestamp: new Date().getTime()
+        }));
+        window.history.pushState(null, '', '/');
+        initRouter();
+        window.scrollTo(0, 0);
+      } else {
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'login-error';
+        errorDiv.style.cssText = `
+          background: rgba(200, 22, 29, 0.1);
+          border: 1px solid rgba(200, 22, 29, 0.3);
+          color: #f87171;
+          padding: 12px 16px;
+          border-radius: 8px;
+          font-size: 14px;
+          margin-bottom: 16px;
+          text-align: center;
+        `;
+        errorDiv.textContent = 'Email ou senha incorretos. Tente novamente.';
+        loginForm.insertBefore(errorDiv, loginForm.firstChild);
+
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+
+        passwordInput.value = '';
+        passwordInput.focus();
+      }
+    }, 600);
+  });
+}());
 </script>
 </body>
 </html>

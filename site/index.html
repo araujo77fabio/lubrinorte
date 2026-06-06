@@ -1380,7 +1380,7 @@ if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
       <h1 style="font-size: 32px; font-weight: 800; margin-bottom: 10px; font-family: var(--ff-d);">Acesso B2B</h1>
       <p style="color: var(--muted); margin-bottom: 30px; font-size: 14px;">Distribuidoras e clientes corporativos</p>
 
-      <form id="login-form" style="display: flex; flex-direction: column; gap: 16px;">
+      <form id="login-form" novalidate onsubmit="handleLogin(event); return false;" style="display: flex; flex-direction: column; gap: 16px;">
         <!-- Email -->
         <div style="display: flex; flex-direction: column; gap: 8px;">
           <label style="font-size: 13px; font-weight: 600; color: var(--white); text-transform: uppercase; letter-spacing: 0.04em;">Email</label>
@@ -1477,66 +1477,62 @@ document.addEventListener('click', function(e) {
   }
 });
 
-// LOGIN HANDLER
-(function() {
-  const loginForm = document.getElementById('login-form');
-  if (!loginForm) return;
+// LOGIN HANDLER — global function called directly from onsubmit attribute
+function handleLogin(e) {
+  if (e && e.preventDefault) e.preventDefault();
 
-  loginForm.addEventListener('submit', function(e) {
-    e.preventDefault();
+  var loginForm = document.getElementById('login-form');
+  if (!loginForm) return false;
 
-    const emailInput = loginForm.querySelector('input[type="email"]');
-    const passwordInput = loginForm.querySelector('input[type="password"]');
-    const submitButton = loginForm.querySelector('button[type="submit"]');
+  var emailInput = loginForm.querySelector('input[type="email"]');
+  var passwordInput = loginForm.querySelector('input[type="password"]');
+  var submitButton = loginForm.querySelector('button[type="submit"]');
 
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
+  var email = emailInput ? emailInput.value.trim() : '';
+  var password = passwordInput ? passwordInput.value.trim() : '';
 
-    const validEmail = 'admin@lubrinorte.com';
-    const validPassword = 'Lubrinorte@2026';
+  if (!email || !password) return false;
 
-    const errorMsg = loginForm.querySelector('.login-error');
-    if (errorMsg) errorMsg.remove();
+  var validEmail = 'admin@lubrinorte.com';
+  var validPassword = 'Lubrinorte@2026';
 
-    const originalText = submitButton.textContent;
-    submitButton.textContent = 'Autenticando...';
-    submitButton.disabled = true;
+  var errorMsg = loginForm.querySelector('.login-error');
+  if (errorMsg) errorMsg.remove();
 
-    setTimeout(function() {
-      if (email === validEmail && password === validPassword) {
-        sessionStorage.setItem('lubrinorte_user', JSON.stringify({
-          email: email,
-          loggedIn: true,
-          timestamp: new Date().getTime()
-        }));
-        window.history.pushState(null, '', '/');
-        initRouter();
-        window.scrollTo(0, 0);
-      } else {
-        const errorDiv = document.createElement('div');
-        errorDiv.className = 'login-error';
-        errorDiv.style.cssText = `
-          background: rgba(200, 22, 29, 0.1);
-          border: 1px solid rgba(200, 22, 29, 0.3);
-          color: #f87171;
-          padding: 12px 16px;
-          border-radius: 8px;
-          font-size: 14px;
-          margin-bottom: 16px;
-          text-align: center;
-        `;
-        errorDiv.textContent = 'Email ou senha incorretos. Tente novamente.';
-        loginForm.insertBefore(errorDiv, loginForm.firstChild);
+  var originalText = submitButton ? submitButton.textContent : 'Entrar';
+  if (submitButton) { submitButton.textContent = 'Autenticando...'; submitButton.disabled = true; }
 
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
+  setTimeout(function() {
+    if (email === validEmail && password === validPassword) {
+      sessionStorage.setItem('lubrinorte_user', JSON.stringify({
+        email: email,
+        loggedIn: true,
+        timestamp: new Date().getTime()
+      }));
+      window.history.pushState(null, '', '/');
+      initRouter();
+      window.scrollTo(0, 0);
+    } else {
+      var errorDiv = document.createElement('div');
+      errorDiv.className = 'login-error';
+      errorDiv.style.background = 'rgba(200, 22, 29, 0.1)';
+      errorDiv.style.border = '1px solid rgba(200, 22, 29, 0.3)';
+      errorDiv.style.color = '#f87171';
+      errorDiv.style.padding = '12px 16px';
+      errorDiv.style.borderRadius = '8px';
+      errorDiv.style.fontSize = '14px';
+      errorDiv.style.marginBottom = '16px';
+      errorDiv.style.textAlign = 'center';
+      errorDiv.textContent = 'Email ou senha incorretos. Tente novamente.';
+      loginForm.insertBefore(errorDiv, loginForm.firstChild);
 
-        passwordInput.value = '';
-        passwordInput.focus();
-      }
-    }, 600);
-  });
-}());
+      if (submitButton) { submitButton.textContent = originalText; submitButton.disabled = false; }
+      if (passwordInput) { passwordInput.value = ''; passwordInput.focus(); }
+    }
+  }, 600);
+
+  return false;
+}
 </script>
 </body>
 </html>

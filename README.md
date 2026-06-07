@@ -1,72 +1,71 @@
-# Lubrinorte Manaus — Site Institucional
+# Lubrinorte — Sistema Completo Unificado
 
-Distribuídora de óleos lubrificantes Texaco, UNI e Baterias Moura em Manaus, Amazonas.
-
-## 🎬 Tecnologias
-
-- **HTML5** — Estrutura semântica
-- **CSS3** — Design moderno, dark mode, responsivo
-- **JavaScript** — Vanilla JS, sem dependências
-- **GSAP 3.12.5** — Animações cinematográficas
-- **Lenis 1.0.42** — Scroll suave
-- **Google Fonts** — Bebas Neue, Inter, IBM Plex Mono
+Repositório unificado contendo o **site institucional B2B** e o **sistema ERP** para Lubrinorte Manaus.
 
 ## 📂 Estrutura
 
 ```
 lubrinorte/
-├── site/
-│   └── index.html          # Site principal (1.5k linhas)
-├── netlify.toml            # Configuração Netlify
-├── PRD-lubrinorte-website.md  # Documento de requisitos
-└── README.md               # Este arquivo
+├── /site              # Site institucional B2B (Netlify)
+│   ├── index.html     # Single HTML com login B2B
+│   ├── server.py      # SPA server para roteamento local
+│   └── ...
+│
+├── /erp               # Sistema ERP interno
+│   ├── /apps
+│   │   ├── web/       # Dashboard ERP (Next.js + Auth + Supabase)
+│   │   └── docs/      # Documentação
+│   ├── /packages      # Pacotes compartilhados (UI, TypeScript, ESLint)
+│   ├── /supabase      # Migrations e seeds
+│   ├── /scripts       # Scripts de setup/seed
+│   └── package.json   # Monorepo (Turborepo)
+│
+├── netlify.toml       # Configuração Netlify (aponta para /site)
+├── .gitignore
+└── README.md          # Este arquivo
 ```
 
 ## 🚀 Deploy
 
-### Netlify
+### Site Institucional (Netlify)
+- **URL:** https://lubrinorte.netlify.app
+- **Acesso:** `/login` com credenciais `admin@lubrinorte.com / Lubrinorte@2026`
+- **Build:** Netlify CI/CD automático do branch `main`
 
-1. Acesse [netlify.com](https://netlify.com)
-2. Clique em "New site from Git"
-3. Selecione GitHub e o repositório `lubrinorte`
-4. Publique automaticamente a cada push
+### Sistema ERP
+- Local em desenvolvimento ou em outro servidor
+- Stack: Next.js + TypeScript + Supabase + Turborepo
 
-### Local (desenvolvimento)
+## 🔧 Desenvolvimento Local
 
+### Site Institucional
 ```bash
 cd site
-python -m http.server 3000
-# Acesse http://localhost:3000
+python server.py  # Serve em http://localhost:8765
+# Acesse http://localhost:8765/login
 ```
+
+### Sistema ERP
+```bash
+cd erp
+npm install       # Instala dependências (Turborepo gerencia monorepo)
+npm run dev       # Inicia desenvolvimento
+```
+
+## 📝 Credenciais Demo
+
+**Site Institucional (B2B Login):**
+- Email: `admin@lubrinorte.com`
+- Senha: `Lubrinorte@2026`
+
+## 📦 Git
+
+- Repositório: https://github.com/araujo77fabio/lubrinorte.git
+- Branch principal: `main`
+- Histórico unificado a partir de commit `6f59cc1`
 
 ## 📞 Contato
 
 - **Telefone:** (92) 3622-1479
 - **WhatsApp:** (92) 3622-1479
 - **Localização:** Manaus, Amazonas
-
-## 📋 Seções do Site
-
-- **Hero** — Apresentação cinematográfica com animações GSAP
-- **Produtos** — Catálogo: Texaco, UNI, Baterias Moura
-- **Segmentos** — Transportadoras, Oficinas, Barcos, Indústrias
-- **Diferenciais** — 4 pontos-chave de diferenciação
-- **Banner** — Chamada visual
-- **Cotação** — Formulário de contato + links diretos
-- **Footer** — Informações finais
-
-## ✨ Recursos
-
-- ✅ Animações smooth (Lenis scroll)
-- ✅ GSAP ScrollTrigger para animações sob demanda
-- ✅ Custom cursor (desktop)
-- ✅ Menu mobile responsivo
-- ✅ Formulário funcional
-- ✅ WhatsApp flutuante
-- ✅ SEO otimizado
-- ✅ Acessibilidade (WCAG 2.1)
-- ✅ Core Web Vitals otimizados
-
-## 📄 Licença
-
-Lubrinorte Manaus © 2026. Todos os direitos reservados.

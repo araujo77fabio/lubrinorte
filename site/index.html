@@ -1447,7 +1447,15 @@ function initRouter() {
   if (isDashboard) {
     var erpUrl = getErpUrl();
     if (erpUrl) {
+      // Desenvolvimento: redireciona para o ERP local
       window.location.href = erpUrl + path;
+    } else {
+      // Produção: /dashboard não existe no site estático — volta para /login
+      window.history.replaceState(null, '', '/login');
+      loginPage.style.display = 'block';
+      document.body.style.overflow = 'hidden';
+      if (mainContent) mainContent.style.visibility = 'hidden';
+      document.title = 'Lubrinorte | Acesso B2B';
     }
     return;
   }
@@ -1557,7 +1565,10 @@ function handleLogin(e) {
 function showLoginSuccess(userEmail) {
   var loginPage = document.getElementById('login-page');
   var container = loginPage.querySelector('div > div');
-  var erpUrl = getErpUrl() + '/dashboard';
+  var erpUrl = getErpUrl();
+  var erpButton = erpUrl
+    ? '<a href="' + erpUrl + '/dashboard" style="display:block;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#111;font-weight:700;padding:12px 20px;border-radius:8px;text-decoration:none;font-size:14px;margin-bottom:12px;text-align:center;">Abrir Painel ERP</a>'
+    : '<p style="font-size:13px;color:var(--muted);margin-bottom:12px;text-align:center;padding:12px 16px;border:1px solid var(--line);border-radius:8px;">Acesso ERP disponível na rede interna</p>';
   container.innerHTML =
     '<div style="text-align:center;">' +
       '<div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#f0d47a,#c9a84c);display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">' +
@@ -1565,7 +1576,7 @@ function showLoginSuccess(userEmail) {
       '</div>' +
       '<h2 style="font-size:28px;font-weight:800;margin-bottom:8px;font-family:var(--ff-d);">Acesso autorizado</h2>' +
       '<p style="color:var(--muted);font-size:14px;margin-bottom:32px;">' + userEmail + '</p>' +
-      '<a href="' + erpUrl + '" style="display:block;background:linear-gradient(135deg,var(--gold2),var(--gold));color:#111;font-weight:700;padding:12px 20px;border-radius:8px;text-decoration:none;font-size:14px;margin-bottom:12px;text-align:center;">Abrir Painel ERP</a>' +
+      erpButton +
       '<a href="/" style="display:block;text-align:center;padding:12px 20px;border:1px solid var(--line);border-radius:8px;color:var(--white);text-decoration:none;font-size:13px;">Voltar para o site</a>' +
       '<p style="text-align:center;font-size:11px;color:var(--muted);margin-top:24px;font-family:var(--ff-m);">Sessão autenticada via Supabase</p>' +
     '</div>';
